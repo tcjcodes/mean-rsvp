@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { AuthService } from './auth/auth.service';
 
 // could also achieve close to the same thing by setting height: 100vh on the layout canvas element in our CSS,
 // but we're going with a JS option due to inconsistencies with vh in mobile browsers.
@@ -13,7 +14,9 @@ export class AppComponent implements OnInit {
   minHeight: string;
   private _initWinHeight = 0;
 
-  constructor() {
+  constructor(private auth: AuthService) {
+    // Check for authentication and handle if hash present
+    auth.handleAuth();
   }
 
   ngOnInit() {
